@@ -5,6 +5,7 @@ import Stats from "./components/Stats";
 import { useDispatch } from "react-redux";
 import { increment } from "./features/Counters/CounterSlices";
 import { decrement } from "./features/Counters/counterSlices";
+import Posts from "./components/Posts";
 
 
 
@@ -64,6 +65,7 @@ function App() {
       ))}
 
       <Stats totalCount={totalCount}></Stats>
+      <Posts/>
     </>
   );
 }
