@@ -1,9 +1,12 @@
 // import { useState } from 'react'
-import { useSelector } from 'react-redux';
-import Counter from './components/Counter'
-import Stats from './components/Stats'
-import { useDispatch } from 'react-redux';
-import { decrement, increment } from './features/Counters/CounterSlice';
+import { useSelector } from "react-redux";
+import Counter from "./components/Counter";
+import Stats from "./components/Stats";
+import { useDispatch } from "react-redux";
+import { increment } from "./features/Counters/CounterSlices";
+import { decrement } from "./features/Counters/counterSlices";
+
+
 
 //  const initilalcounters =[
 //   {
@@ -16,14 +19,13 @@ import { decrement, increment } from './features/Counters/CounterSlice';
 //   }
 //  ]
 
-
 function App() {
-  const counters = useSelector((state) =>state.counters);
-  const dispatch = useDispatch()
+  const counters = useSelector((state) => state.counters);
+  const dispatch = useDispatch();
   // const [counters, setCounters] = useState(initilalcounters)
-  const totalCount = counters.reduce((sum,current)=>sum+current.value,0)
+  const totalCount = counters.reduce((sum, current) => sum + current.value, 0);
 
-  const handleIncrement= (counterId) =>{
+  const handleIncrement = (counterId) => {
     //   const upadatedCounters = counters.map(counter=>{
     //   if(counter.id === counterId){
     //     return{
@@ -34,9 +36,9 @@ function App() {
     //   return counter
     // })
     // setCounters(upadatedCounters)
-    dispatch(increment(counterId))
-  }
-  const handleDecrement=(counterId)=>{
+    dispatch(increment(counterId));
+  };
+  const handleDecrement = (counterId) => {
     // const updatedCounters = counters.map(counter=>{
     //   if(counter.id === counterId){
     //     return{
@@ -48,20 +50,22 @@ function App() {
     // })
     //  setCounters(updatedCounters)
     dispatch(decrement(counterId));
-    
-  }
+  };
 
   return (
     <>
-   {
-    counters.map((counter)=>(<Counter key={counter.id}
-    onIncrement ={()=> handleIncrement(counter.id)}
-    onDecrement = {()=>handleDecrement(counter.id)}
-    counters ={counter.value}/>))}
+      {counters.map((counter) => (
+        <Counter
+          key={counter.id}
+          onIncrement={() => handleIncrement(counter.id)}
+          onDecrement={() => handleDecrement(counter.id)}
+          counters={counter.value}
+        />
+      ))}
 
-     <Stats totalCount={totalCount}></Stats>
+      <Stats totalCount={totalCount}></Stats>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
